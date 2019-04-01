@@ -17,7 +17,7 @@ public class Linhas {
     private Connection conexao;
     
     public void chamaConexao () throws SQLException, ClassNotFoundException{
-        conexao = Conexao.setConnection("127.0.0.1:1234", "postgres", "postgres", "JtkMPma0");
+        conexao = Conexao.setConnection("127.0.0.1:5432", "postgres", "postgres", "JtkMPma0");
     }
     
     public void linha (String comando) throws SQLException {

@@ -5,6 +5,8 @@
  */
 package aplicacao_bd;
 
+import static java.lang.Integer.max;
+
 /**
  *
  * @author Francisco Rodrigues
@@ -31,7 +33,7 @@ public class consultas extends javax.swing.JFrame {
         textConsulta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         buscarButton = new javax.swing.JButton();
-        opcao = new javax.swing.JComboBox<String>();
+        opcao = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaResultado = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -62,7 +64,7 @@ public class consultas extends javax.swing.JFrame {
             }
         });
 
-        opcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", " " }));
+        opcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", " " }));
         opcao.setToolTipText("");
         opcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +73,7 @@ public class consultas extends javax.swing.JFrame {
         });
 
         areaResultado.setColumns(20);
+        areaResultado.setFont(new java.awt.Font("Ubuntu Mono", 0, 15)); // NOI18N
         areaResultado.setRows(5);
         jScrollPane1.setViewportView(areaResultado);
 
@@ -151,6 +154,47 @@ public class consultas extends javax.swing.JFrame {
         System.out.println(textConsulta.getText());
     }//GEN-LAST:event_textConsultaActionPerformed
 
+    private String[] formatTable (String[] results) {
+        String[] ret = new String[1000];
+        int[] colSizes = new int[1000];
+        for (int lin = 0; results[lin] != null; lin++) {
+            int col = 0;
+            int acu = 0;
+            String linhaAtual = results[lin];
+            for (int i = 0; i < linhaAtual.length(); i++) {
+                if (linhaAtual.charAt(i) == '\\') {
+                    colSizes[col] = max (colSizes[col], acu);
+                    ++col;
+                    acu = 0;
+                } else
+                    ++acu;
+            }
+        }
+        
+        for (int lin = 0; results[lin] != null; lin++) {
+            ret[lin] = "";
+            int col = 0;
+            int acu = 0;
+            String linhaAtual = results[lin];
+            for (int i = 0; i < linhaAtual.length(); i++) {
+                if (linhaAtual.charAt(i) == '\\') {
+                    while (acu < colSizes[col]) {
+                        ret[lin] += ' ';
+                        acu++;
+                    }
+                    ret[lin] += '|';
+                    ++col;
+                    acu = 0;
+                } else {
+                    ret[lin] += linhaAtual.charAt (i);
+                    ++acu;
+                }
+            }
+        }
+
+        return ret;
+    }
+    
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
         //areaResultado.removeAll();
         int index = opcao.getSelectedIndex() + 1;
@@ -298,6 +342,8 @@ public class consultas extends javax.swing.JFrame {
                 }
                 break;
         }
+        
+        results = formatTable (results);
         int i = 0;
         String imp = "";
         while (results[i] != null) {
