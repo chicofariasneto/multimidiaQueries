@@ -33,7 +33,7 @@ public class consultas extends javax.swing.JFrame {
         buscarButton = new javax.swing.JButton();
         opcao = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        areaResultado = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         buttonBackCons = new javax.swing.JButton();
@@ -70,9 +70,9 @@ public class consultas extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        areaResultado.setColumns(20);
+        areaResultado.setRows(5);
+        jScrollPane1.setViewportView(areaResultado);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Biblioteca de Multimídia");
@@ -152,6 +152,7 @@ public class consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_textConsultaActionPerformed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        //areaResultado.removeAll();
         int index = opcao.getSelectedIndex() + 1;
         System.out.println(index);
         String entrada = textConsulta.getText();
@@ -298,10 +299,13 @@ public class consultas extends javax.swing.JFrame {
                 break;
         }
         int i = 0;
+        String imp = "";
         while (results[i] != null) {
+            imp += results[i] + '\n';
             System.out.println(results[i]);
             ++i;
         }
+        areaResultado.setText(imp);
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void opcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcaoActionPerformed
@@ -348,6 +352,7 @@ public class consultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaResultado;
     private javax.swing.JButton buscarButton;
     private javax.swing.JButton buttonBackCons;
     private javax.swing.JButton jButton1;
@@ -355,7 +360,6 @@ public class consultas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> opcao;
     private javax.swing.JTextField textConsulta;
     // End of variables declaration//GEN-END:variables
