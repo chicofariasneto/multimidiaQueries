@@ -31,7 +31,7 @@ public class consultas extends javax.swing.JFrame {
         textConsulta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         buscarButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        opcao = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -62,11 +62,11 @@ public class consultas extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", " " }));
-        jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        opcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", " " }));
+        opcao.setToolTipText("");
+        opcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                opcaoActionPerformed(evt);
             }
         });
 
@@ -97,7 +97,7 @@ public class consultas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(opcao, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addComponent(buscarButton)
@@ -135,7 +135,7 @@ public class consultas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(opcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buscarButton)
@@ -148,16 +148,35 @@ public class consultas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textConsultaActionPerformed
-        // TODO add your handling code here:
+        System.out.println(textConsulta.getText());
     }//GEN-LAST:event_textConsultaActionPerformed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        // TODO add your handling code here:
+        int index = opcao.getSelectedIndex()+1;
+        System.out.println(index);
+        String entrada = textConsulta.getText();
+        System.out.println(entrada);
+        String[] results = new String[100];
+        consultasFunction consultar = new consultasFunction();
+        try {
+            consultar.chamaConexao();
+        } catch(Exception ex) {System.out.println("Falha ao tentar conectar ao servidor");}
+        switch (index) {
+            case 1 :
+                try {
+                    results = consultar.consulta1(entrada);
+                } catch(Exception ex) {System.out.println("Algo deu errado com a cosnulta");}    
+        }
+        int i = 0;
+        while (results[i] != null) {
+            System.out.println(results[i]);
+            ++i;
+        }
     }//GEN-LAST:event_buscarButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void opcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcaoActionPerformed
+        
+    }//GEN-LAST:event_opcaoActionPerformed
 
     private void buttonBackConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackConsActionPerformed
         dispose();
@@ -202,12 +221,12 @@ public class consultas extends javax.swing.JFrame {
     private javax.swing.JButton buscarButton;
     private javax.swing.JButton buttonBackCons;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> opcao;
     private javax.swing.JTextField textConsulta;
     // End of variables declaration//GEN-END:variables
 }
