@@ -496,7 +496,8 @@ public class consultasFunction {
                 "JOIN multimidia.produz prod USING (cpf) " +
                 "JOIN multimidia.conteudo cont USING (idconteudo) " +
                 "JOIN multimidia.usuario usu USING (email, username) " +
-                "GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome";
+                "GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome " +
+                "ORDER BY count(cont.idConteudo) DESC";
         Statement comando = conexao.createStatement();
         ResultSet resultado = comando.executeQuery(consulta);
         
