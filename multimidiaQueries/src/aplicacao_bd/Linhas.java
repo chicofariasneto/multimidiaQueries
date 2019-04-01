@@ -79,5 +79,11 @@ public class Linhas {
         comando.executeQuery(consulta);
     }
     
+    public void addUsuario(String novo) throws SQLException {
+        String consulta = "INSERT INTO multimidia.usuario "
+                        + "VALUES (" + novo + ")";
+        Statement comando = conexao.createStatement();
+        comando.executeQuery(consulta);
+    }
     
 }

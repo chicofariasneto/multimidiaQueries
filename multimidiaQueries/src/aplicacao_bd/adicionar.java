@@ -135,7 +135,7 @@ public class adicionar extends javax.swing.JFrame {
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
         Linhas consultar = new Linhas();
-        String novoGenero = entrada.getText();
+        String novo = entrada.getText();
         try {
             consultar.chamaConexao();
         } catch (Exception ex) {
@@ -146,17 +146,25 @@ public class adicionar extends javax.swing.JFrame {
         
         if (index == 1) {
             try {
-                consultar.addComentario(novoGenero);
+                consultar.addComentario(novo);
             } catch (SQLException ex) {
                 System.out.println("O comentario foi adicionado, ou talvez não.");
             }
         }
         else if (index == 2) {
             try {
-                consultar.addGenero(novoGenero);
+                consultar.addGenero(novo);
             } catch (Exception ex) {
                 System.out.println("Erro ao inserir genero, quer dizer, as vezes não");
                 return;
+            }
+        }
+        
+        else if (index == 3) {
+            try {
+                consultar.addUsuario(novo);
+            } catch (SQLException ex) {
+                System.out.println("novo user, ou n");
             }
         }
         
