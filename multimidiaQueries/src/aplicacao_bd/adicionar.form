@@ -38,7 +38,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
-                              <Component id="buscarButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="adicionar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="buttonBackAdd" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -48,9 +48,9 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" pref="145" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <Component id="seletorTabela" min="-2" pref="178" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextField1" min="-2" pref="550" max="-2" attributes="0"/>
+                                  <Component id="entrada" min="-2" pref="550" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -69,15 +69,15 @@
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="entrada" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="seletorTabela" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buscarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="adicionar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonBackAdd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="220" max="32767" attributes="0"/>
@@ -93,9 +93,9 @@
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="entrada">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entradaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -105,7 +105,7 @@
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="seletorTabela">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -119,12 +119,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="buscarButton">
+    <Component class="javax.swing.JButton" name="adicionar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adicionarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonBackAdd">

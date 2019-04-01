@@ -5,6 +5,10 @@
  */
 package aplicacao_bd;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Francisco Rodrigues
@@ -28,10 +32,10 @@ public class adicionar extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        entrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        buscarButton = new javax.swing.JButton();
+        seletorTabela = new javax.swing.JComboBox<String>();
+        adicionar = new javax.swing.JButton();
         buttonBackAdd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -42,9 +46,9 @@ public class adicionar extends javax.swing.JFrame {
         jLabel2.setText("Adicionar Linha");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        entrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                entradaActionPerformed(evt);
             }
         });
 
@@ -52,12 +56,12 @@ public class adicionar extends javax.swing.JFrame {
         jLabel3.setText("Biblioteca de Multimídia");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Genero", "Conteudo" }));
+        seletorTabela.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuario", "Genero", "Conteudo" }));
 
-        buscarButton.setText("Adicionar");
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+        adicionar.setText("Adicionar");
+        adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
+                adicionarActionPerformed(evt);
             }
         });
 
@@ -88,7 +92,7 @@ public class adicionar extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(335, 335, 335)
-                                .addComponent(buscarButton)
+                                .addComponent(adicionar)
                                 .addGap(18, 18, 18)
                                 .addComponent(buttonBackAdd))
                             .addGroup(layout.createSequentialGroup()
@@ -97,8 +101,8 @@ public class adicionar extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(seletorTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 170, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -110,14 +114,14 @@ public class adicionar extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seletorTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscarButton)
+                    .addComponent(adicionar)
                     .addComponent(buttonBackAdd))
                 .addContainerGap(220, Short.MAX_VALUE))
         );
@@ -125,13 +129,31 @@ public class adicionar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void entradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_entradaActionPerformed
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
+        consultasFunction consultar = new consultasFunction();
+        String novoGenero;
+        try {
+            consultar.chamaConexao();
+        } catch (Exception ex) {
+            System.out.println("Erro ao se conectar");
+            return;
+        }
+        int index = seletorTabela.getSelectedIndex()+1;
+        if (index == 2) {
+            novoGenero = entrada.getText();
+            try {
+                consultar.addGenero(novoGenero);
+            } catch (Exception ex) {
+                System.out.println("Erro ao inserir genero");
+                return;
+            }
+        }
+        
+    }//GEN-LAST:event_adicionarActionPerformed
 
     private void buttonBackAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackAddActionPerformed
         dispose();
@@ -174,12 +196,12 @@ public class adicionar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarButton;
+    private javax.swing.JButton adicionar;
     private javax.swing.JButton buttonBackAdd;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField entrada;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> seletorTabela;
     // End of variables declaration//GEN-END:variables
 }
