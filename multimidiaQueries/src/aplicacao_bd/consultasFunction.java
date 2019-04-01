@@ -19,7 +19,7 @@ public class consultasFunction {
     private Connection conexao;
     
     public void chamaConexao () throws SQLException, ClassNotFoundException{
-        conexao = Conexao.setConnection("127.0.0.1", "postgres", "postgres", "postgres");
+        conexao = Conexao.setConnection("127.0.0.1:1234", "postgres", "postgres", "JtkMPma0");
     }
     
     public String[] consulta1(String nome) throws SQLException, ClassNotFoundException {
@@ -496,7 +496,8 @@ public class consultasFunction {
                 "JOIN multimidia.produz prod USING (cpf) " +
                 "JOIN multimidia.conteudo cont USING (idconteudo) " +
                 "JOIN multimidia.usuario usu USING (email, username) " +
-                "GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome";
+                "GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome " +
+                "ORDER BY count(cont.idConteudo) DESC";
         Statement comando = conexao.createStatement();
         ResultSet resultado = comando.executeQuery(consulta);
         

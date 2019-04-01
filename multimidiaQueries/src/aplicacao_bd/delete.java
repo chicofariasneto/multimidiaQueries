@@ -5,6 +5,8 @@
  */
 package aplicacao_bd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Francisco Rodrigues
@@ -27,22 +29,22 @@ public class delete extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        buscarButton = new javax.swing.JButton();
+        choices = new javax.swing.JComboBox<>();
+        deleteButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textDelete = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         buttonBackDel = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Genero", "Conteudo" }));
+        choices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Genero", "Conteudo", "Comentario" }));
 
-        buscarButton.setText("Delete");
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -50,9 +52,9 @@ public class delete extends javax.swing.JFrame {
         jLabel2.setText("Tabelas Disponiveis:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textDeleteActionPerformed(evt);
             }
         });
 
@@ -79,7 +81,7 @@ public class delete extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buscarButton)
+                        .addComponent(deleteButton)
                         .addGap(18, 18, 18)
                         .addComponent(buttonBackDel)
                         .addGap(373, 373, 373))
@@ -92,8 +94,8 @@ public class delete extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(choices, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -107,14 +109,14 @@ public class delete extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(choices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscarButton)
+                    .addComponent(deleteButton)
                     .addComponent(buttonBackDel))
                 .addContainerGap(243, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,13 +129,44 @@ public class delete extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        String conteudo;
+        Linhas linhas = new Linhas();
+        int index = choices.getSelectedIndex()+1;
+        conteudo = textDelete.getText();
+        switch (index) {
+            case 1:
+                try {
+                    linhas.deleteGenero(conteudo);
+                    JOptionPane.showMessageDialog(null, "Genero Deletado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            case 2:
+                try {
+                    linhas.deleteConteudo(conteudo);
+                    JOptionPane.showMessageDialog(null, "Conteudo Deletado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            case 3:
+                try {
+                    linhas.deleteComentario(conteudo);
+                    JOptionPane.showMessageDialog(null, "Comentario Deletado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textDeleteActionPerformed
 
     private void buttonBackDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackDelActionPerformed
         dispose();
@@ -175,12 +208,12 @@ public class delete extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarButton;
     private javax.swing.JButton buttonBackDel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> choices;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField textDelete;
     // End of variables declaration//GEN-END:variables
 }
