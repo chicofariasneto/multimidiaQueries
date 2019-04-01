@@ -5,6 +5,8 @@
  */
 package aplicacao_bd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Francisco Rodrigues
@@ -28,12 +30,17 @@ public class update extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        pkUp = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        buscarButton = new javax.swing.JButton();
+        choices = new javax.swing.JComboBox<>();
+        upButton = new javax.swing.JButton();
         buttonBackUp = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        novoValUp = new javax.swing.JTextField();
+        atributoUp = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,9 +48,9 @@ public class update extends javax.swing.JFrame {
         jLabel3.setText("Biblioteca de Multimídia");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        pkUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                pkUpActionPerformed(evt);
             }
         });
 
@@ -51,12 +58,12 @@ public class update extends javax.swing.JFrame {
         jLabel2.setText("Atualizar Linha");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Genero", "Conteudo" }));
+        choices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Genero", "Conteudo", "Comentario" }));
 
-        buscarButton.setText("Update");
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+        upButton.setText("Update");
+        upButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
+                upButtonActionPerformed(evt);
             }
         });
 
@@ -71,6 +78,30 @@ public class update extends javax.swing.JFrame {
         jLabel4.setText("Tabelas Disponiveis:");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        novoValUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novoValUpActionPerformed(evt);
+            }
+        });
+
+        atributoUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atributoUpActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Indique a pk");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Indique o novo valor");
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Indique o atributo");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,23 +112,30 @@ public class update extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                        .addGap(117, 117, 117)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(novoValUp, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(atributoUp, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pkUp, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(choices, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(buscarButton)
-                .addGap(18, 18, 18)
-                .addComponent(buttonBackUp)
-                .addGap(335, 335, 335))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(195, 195, 195))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(upButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonBackUp)
+                        .addGap(252, 252, 252))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,32 +145,83 @@ public class update extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pkUp, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                    .addComponent(atributoUp, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscarButton)
-                    .addComponent(buttonBackUp))
-                .addContainerGap(189, Short.MAX_VALUE))
+                    .addComponent(novoValUp, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(choices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonBackUp)
+                    .addComponent(upButton))
+                .addGap(129, 129, 129))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void pkUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_pkUpActionPerformed
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
+        String pk, atributo, value;
+        Linhas linhas = new Linhas();
+        int index = choices.getSelectedIndex()+1;
+        pk = pkUp.getText();
+        atributo = atributoUp.getText();
+        value = novoValUp.getText();
+        switch (index) {
+            case 1:
+                try {
+                    linhas.updateGenero(pk, value);
+                    JOptionPane.showMessageDialog(null, "Genero Atualizado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            case 2:
+                try {
+                    linhas.updateConteudo(pk, atributo, value);
+                    JOptionPane.showMessageDialog(null, "Conteudo Atualizado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            case 3:
+                try {
+                    linhas.updateComentario(pk, atributo, value);
+                    JOptionPane.showMessageDialog(null, "Comentario Atualizado!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Conexao nao sucedida!");
+                    System.out.println("Erro ao deletar!");
+                }   break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_upButtonActionPerformed
 
     private void buttonBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackUpActionPerformed
         dispose();
     }//GEN-LAST:event_buttonBackUpActionPerformed
+
+    private void novoValUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoValUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_novoValUpActionPerformed
+
+    private void atributoUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atributoUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_atributoUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,12 +259,17 @@ public class update extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarButton;
+    private javax.swing.JTextField atributoUp;
     private javax.swing.JButton buttonBackUp;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> choices;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField novoValUp;
+    private javax.swing.JTextField pkUp;
+    private javax.swing.JButton upButton;
     // End of variables declaration//GEN-END:variables
 }
