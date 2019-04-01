@@ -761,11 +761,4 @@ public class consultasFunction {
         return list;
     }
     
-    public void addGenero(String novo) throws SQLException, ClassNotFoundException {
-        String consulta = "INSERT INTO multimidia.genero VALUES"
-                + " ('" + novo  +"')";
-        Statement comando = conexao.createStatement();
-        comando.executeQuery(consulta);
-    }
-    
 }

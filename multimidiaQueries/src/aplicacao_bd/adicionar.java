@@ -134,8 +134,8 @@ public class adicionar extends javax.swing.JFrame {
     }//GEN-LAST:event_entradaActionPerformed
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
-        consultasFunction consultar = new consultasFunction();
-        String novoGenero;
+        Linhas consultar = new Linhas();
+        String novoGenero = entrada.getText();
         try {
             consultar.chamaConexao();
         } catch (Exception ex) {
@@ -143,12 +143,19 @@ public class adicionar extends javax.swing.JFrame {
             return;
         }
         int index = seletorTabela.getSelectedIndex()+1;
-        if (index == 2) {
-            novoGenero = entrada.getText();
+        
+        if (index == 1) {
+            try {
+                consultar.addComentario(novoGenero);
+            } catch (SQLException ex) {
+                System.out.println("O comentario foi adicionado, ou talvez não.");
+            }
+        }
+        else if (index == 2) {
             try {
                 consultar.addGenero(novoGenero);
             } catch (Exception ex) {
-                System.out.println("Erro ao inserir genero");
+                System.out.println("Erro ao inserir genero, quer dizer, as vezes não");
                 return;
             }
         }
