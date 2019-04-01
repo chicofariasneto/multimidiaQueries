@@ -19,7 +19,7 @@ public class consultasFunction {
     private Connection conexao;
     
     public void chamaConexao () throws SQLException, ClassNotFoundException{
-        conexao = Conexao.setConnection("127.0.0.1:1234", "postgres", "postgres", "JtkMPma0");
+        conexao = Conexao.setConnection("127.0.0.1", "postgres", "postgres", "postgres");
     }
     
     public String[] consulta1(String nome) throws SQLException, ClassNotFoundException {
@@ -712,29 +712,39 @@ public class consultasFunction {
         String[] list = new String[100];
         int count = 0;
         chamaConexao();
-        String consulta = "SELECT tab.titulo, " +
-                "tab2.comentarios_positivos/tab.total_comentarios*100 " +
-                "AS porcentagem_de_comentarios_positivos " +
-                "FROM " +
-                "( " +
-                "SELECT cont.titulo, count(idConteudo) total_comentarios " +
-                "FROM multimidia.conteudo cont " +
-                "JOIN multimidia.comentario coment " +
-                "USING (idConteudo) " +
-                "GROUP BY (idConteudo) " +
-                ")tab " +
-                " " +
-                "LEFT JOIN " +
-                " " +
-                "( " +
-                "SELECT cont.titulo, count(idConteudo) comentarios_positivos " +
-                "FROM multimidia.conteudo cont " +
-                "JOIN multimidia.comentario coment " +
-                "USING (idConteudo) " +
-                "WHERE recomenda = TRUE " +
-                "GROUP BY (idConteudo) " +
-                ")tab2 " +
-                "USING (titulo)";
+        String consulta = 
+            "WITH qntPos as\n" +
+            "(\n" +
+            "	SELECT idConteudo, titulo, count (num_comentario) qntPositivo\n" +
+            "	FROM multimidia.conteudo\n" +
+            "		LEFT JOIN\n" +
+            "		(\n" +
+            "			SELECT idConteudo, num_comentario\n" +
+            "			FROM multimidia.comentario\n" +
+            "			WHERE recomenda = TRUE\n" +
+            "		) comPos USING (idConteudo)\n" +
+            "	GROUP BY idConteudo\n" +
+            "),\n" +
+            "	qntTotal as\n" +
+            "(\n" +
+            "	SELECT idConteudo, titulo, count (num_comentario) qntTotal\n" +
+            "	FROM multimidia.conteudo\n" +
+            "		LEFT JOIN multimidia.comentario USING (idConteudo)\n" +
+            "	GROUP BY idConteudo\n" +
+            ")\n" +
+            "\n" +
+            "\n" +
+            "\n" +
+            "SELECT titulo, porcentagem_de_comentarios_positivos\n" +
+            "FROM multimidia.conteudo\n" +
+            "	LEFT JOIN\n" +
+            "	(\n" +
+            "		SELECT idConteudo, titulo, qntPositivo/qntTotal*100 AS porcentagem_de_comentarios_positivos\n" +
+            "		FROM qntTotal\n" +
+            "			JOIN qntPos USING (idConteudo, titulo)\n" +
+            "			WHERE qntTotal > 0\n" +
+            "	) perc USING (idConteudo, titulo)\n" +
+            "ORDER BY porcentagem_de_comentarios_positivos";
         Statement comando = conexao.createStatement();
         ResultSet resultado = comando.executeQuery(consulta);
         
