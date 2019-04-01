@@ -152,7 +152,7 @@ public class consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_textConsultaActionPerformed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        int index = opcao.getSelectedIndex()+1;
+        int index = opcao.getSelectedIndex() + 1;
         System.out.println(index);
         String entrada = textConsulta.getText();
         System.out.println(entrada);
@@ -160,12 +160,142 @@ public class consultas extends javax.swing.JFrame {
         consultasFunction consultar = new consultasFunction();
         try {
             consultar.chamaConexao();
-        } catch(Exception ex) {System.out.println("Falha ao tentar conectar ao servidor");}
+        } catch (Exception ex) {
+            System.out.println("Falha ao tentar conectar ao servidor");
+        }
         switch (index) {
-            case 1 :
+            case 1:
                 try {
                     results = consultar.consulta1(entrada);
-                } catch(Exception ex) {System.out.println("Algo deu errado com a cosnulta");}    
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a cosnulta");
+                }
+                break;
+            case 2:
+                try {
+                    results = consultar.consulta2(entrada);
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta");
+                }
+                break;
+            case 3:
+                try {
+                    results = consultar.consulta3();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta");
+                }
+                break;
+            case 4:
+                try {
+                    results = consultar.consulta4();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 5:
+                try {
+                    results = consultar.consulta5();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 6:
+                try {
+                    results = consultar.consulta6();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 7:
+                try {
+                    results = consultar.consulta7();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 8:
+                try {
+                    results = consultar.consulta8();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 9:
+                try {
+                    results = consultar.consulta9();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 10:
+                try {
+                    results = consultar.consulta10();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 11:
+                try {
+                    results = consultar.consulta11();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 12:
+                try {
+                    results = consultar.consulta12();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 13:
+                try {
+                    results = consultar.consulta13();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 14:
+                try {
+                    results = consultar.consulta14(entrada);
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 15:
+                try {
+                    results = consultar.consulta15(entrada);
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 16:
+                try {
+                    results = consultar.consulta16(entrada);
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
+
+            case 17:
+                try {
+                    results = consultar.consulta17();
+                } catch (Exception ex) {
+                    System.out.println("Algo deu errado com a consulta.");
+                }
+                break;
         }
         int i = 0;
         while (results[i] != null) {
@@ -175,7 +305,7 @@ public class consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void opcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcaoActionPerformed
-        
+
     }//GEN-LAST:event_opcaoActionPerformed
 
     private void buttonBackConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackConsActionPerformed
