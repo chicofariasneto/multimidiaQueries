@@ -34,7 +34,7 @@ public class adicionar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         entrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        seletorTabela = new javax.swing.JComboBox<>();
+        seletorTabela = new javax.swing.JComboBox<String>();
         adicionar = new javax.swing.JButton();
         buttonBackAdd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -56,7 +56,7 @@ public class adicionar extends javax.swing.JFrame {
         jLabel3.setText("Biblioteca de Multimídia");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        seletorTabela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Genero", "Conteudo", "Comentario", " " }));
+        seletorTabela.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comentário", "Gênero", "Usuário", "" }));
 
         adicionar.setText("Adicionar");
         adicionar.addActionListener(new java.awt.event.ActionListener() {
