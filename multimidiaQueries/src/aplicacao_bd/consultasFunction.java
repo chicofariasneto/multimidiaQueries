@@ -111,7 +111,7 @@ public class consultasFunction {
         chamaConexao();
         String consulta = "SELECT * " +
                     "FROM multimidia.usuario " +
-                    "WHERE data_de_nascimento < '1996-01-01'";
+                    "WHERE data_de_nascimento <= '2001-04-01'";
         Statement comando = conexao.createStatement();
         ResultSet resultado = comando.executeQuery(consulta);
         
@@ -490,14 +490,14 @@ public class consultasFunction {
         String[] list = new String[100];
         int count = 0;
         chamaConexao();
-        String consulta = "SELECT usu.primeiro_nome, usu.sobrenome, " +
-                "count(cont.idConteudo) AS quantidade_de_conteudos " +
-                "FROM multimidia.artista art " +
-                "JOIN multimidia.produz prod USING (cpf) " +
-                "JOIN multimidia.conteudo cont USING (idconteudo) " +
-                "JOIN multimidia.usuario usu USING (email, username) " +
-                "GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome " +
-                "ORDER BY count(cont.idConteudo) DESC";
+        String consulta =
+            "SELECT usu.primeiro_nome, usu.sobrenome, nome genero, count(cont.idConteudo) AS quantidade_de_conteudos\n" +
+            "	FROM multimidia.artista art\n" +
+            "	JOIN multimidia.produz prod USING (cpf)\n" +
+            "    JOIN multimidia.conteudo cont USING (idconteudo)\n" +
+            "    JOIN multimidia.usuario usu USING (email, username)\n" +
+            "    GROUP BY art.cpf, usu.primeiro_nome, usu.sobrenome, nome\n" +
+            "    ORDER BY count(cont.idConteudo) DESC";
         Statement comando = conexao.createStatement();
         ResultSet resultado = comando.executeQuery(consulta);
         
@@ -517,8 +517,10 @@ public class consultasFunction {
         while (resultado.next()) {
             String primeiro_nome = resultado.getString(1);
             String sobrenome = resultado.getString(2);
-            String counts = resultado.getString(3);
-            list[count++] = primeiro_nome + "\\" + sobrenome + "\\" + counts;
+            String genero = resultado.getString(3);
+            String counts = resultado.getString(4);
+            list[count++] = primeiro_nome + "\\" + sobrenome + "\\" + 
+                    genero + "\\" + counts;
             //System.out.println(primeiro_nome + "\\" + sobrenome + "\\" + counts);
         }
         comando.close();
