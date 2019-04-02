@@ -19,7 +19,7 @@ public class consultasFunction {
     private Connection conexao;
     
     public void chamaConexao () throws SQLException, ClassNotFoundException{
-        conexao = Conexao.setConnection("127.0.0.1", "postgres", "postgres", "postgres");
+        conexao = Conexao.setConnection();
     }
     
     public String[] consulta1(String nome) throws SQLException, ClassNotFoundException {

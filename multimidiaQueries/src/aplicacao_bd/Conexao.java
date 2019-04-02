@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Conexao {
     
-    public static Connection setConnection(String host, String database, String user, String senha) throws SQLException, ClassNotFoundException {
+    public static Connection setConnection() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         Connection conexao = DriverManager.
-                getConnection("jdbc:postgresql://" + host + "/" + database, user, senha);
+                getConnection("jdbc:postgresql://" + "127.0.0.1" + "/" + "postgres", "postgres", "postgres");
         return conexao;
     }
     
